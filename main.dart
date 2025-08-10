@@ -1,0 +1,109 @@
+import 'dart:convert';
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:http/http.dart' as http;
+
+class DifficultyResult {
+  final String question;
+  final String category;
+
+  DifficultyResult({required this.question, required this.category});
+}
+
+class DifficultyAnalyzer {
+  final String apiKey = 'Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX';
+
+  Future<DifficultyResult> analyze(String sentence) async {
+    int matchedWords = 0;
+    int wordCount = 0;
+    int easyScore = 0;
+    int mediumScore = 0;
+    int hardScore = 0;
+    String difficulty = "";
+
+    // Glossary matching
+    final csvData = await rootBundle.loadString('assets/glossary.csv');
+    final lines = LineSplitter.split(csvData);
+    final terms = lines.map((line) => line.trim().toLowerCase()).toSet();
+
+    final formatSentence = sentence
+        .toLowerCase()
+        .replaceAll(RegExp(r'[^\w\s]'), '')
+        .split(' ')
+        .where((word) => word.isNotEmpty)
+        .toList();
+
+    final sentenceWords = formatSentence.toSet();
+    final matches = terms.intersection(sentenceWords);
+
+    matchedWords = matches.length;
+    wordCount = formatSentence.length;
+
+    if (matchedWords == 0) {
+      easyScore += 1;
+    } else if (matchedWords == 1) {
+      mediumScore += 1;
+    } else {
+      hardScore += 1;
+    }
+
+    // MNLI API call
+    final url = Uri.parse('https://api-inference.huggingface.co/models/facebook/bart-large-mnli');
+    final headers = {
+      'Authorization': apiKey,
+      'Content-Type': 'application/json'
+    };
+    final body = jsonEncode({
+      'inputs': sentence,
+      'parameters': {
+        'candidate_labels': ['easy', 'medium', 'hard']
+      }
+    });
+
+    final response = await http.post(url, headers: headers, body: body);
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      final labels = List<String>.from(data['labels']);
+      difficulty = labels.first;
+
+      if (difficulty == 'easy') {
+        easyScore += 1;
+      } else if (difficulty == 'medium') {
+        mediumScore += 1;
+      } else if (difficulty == 'hard') {
+        hardScore += 1;
+      }
+    }
+
+    // Word count scoring
+    if (wordCount < 5) {
+      easyScore += 1;
+    } else if (wordCount <= 8) {
+      mediumScore += 1;
+    } else {
+      hardScore += 1;
+    }
+
+    // Final overall difficulty decision
+    String overall = "Easy";
+    if (easyScore > mediumScore && easyScore > hardScore) {
+      overall = "Easy";
+    } else if (mediumScore > easyScore && mediumScore > hardScore) {
+      overall = "Medium";
+    } else if (hardScore > easyScore && hardScore > mediumScore) {
+      overall = "Hard";
+    } else if (easyScore == mediumScore && mediumScore == hardScore && easyScore != 0) {
+      overall = "Hard";
+    } else if (easyScore == 0 && mediumScore == 0 && hardScore == 0) {
+      overall = "Easy";
+    } else if (easyScore == mediumScore && hardScore == 0) {
+      overall = "Easy";
+    } else if (hardScore == mediumScore && easyScore == 0) {
+      overall = "Medium";
+    } else if (hardScore == easyScore && mediumScore == 0) {
+      overall = "Hard";
+    }
+
+    return DifficultyResult(question: sentence, category: overall);
+  }
+}
