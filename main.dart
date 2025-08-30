@@ -10,7 +10,7 @@ class DifficultyResult {
 }
 
 class DifficultyAnalyzer {
-  final String apiKey = 'Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX';
+  final String apiKey = 'Bearer key';
 
   Future<DifficultyResult> analyze(String sentence) async {
     int matchedWords = 0;
@@ -93,7 +93,7 @@ class DifficultyAnalyzer {
     } else if (hardScore > easyScore && hardScore > mediumScore) {
       overall = "Hard";
     } else if (easyScore == mediumScore && mediumScore == hardScore && easyScore != 0) {
-      overall = "Hard";
+      overall = "Medium";
     } else if (easyScore == 0 && mediumScore == 0 && hardScore == 0) {
       overall = "Easy";
     } else if (easyScore == mediumScore && hardScore == 0) {
@@ -101,7 +101,7 @@ class DifficultyAnalyzer {
     } else if (hardScore == mediumScore && easyScore == 0) {
       overall = "Medium";
     } else if (hardScore == easyScore && mediumScore == 0) {
-      overall = "Hard";
+      overall = "Medium";
     }
 
     return DifficultyResult(question: sentence, category: overall);

@@ -3,12 +3,14 @@ class Bank {
   final List<String> options;
   final int answer;
   String? difficulty;
+  final String category;
 
   Bank({
     required this.question,
     required this.options,
     required this.answer,
     this.difficulty,
+    required this.category,
   });
 }
 
@@ -24,6 +26,51 @@ final List<Bank> questionBank = [
       'To update system firmware'
     ],
     answer: 1,
+    category: 'Phishing',
+  ),
+  Bank(
+    question: 'Email asks password?',
+    options: [
+      'Phishing',
+      'Ransomware',
+      'Malware',
+      'Safe'
+    ],
+    answer: 0,
+    category: 'Phishing',
+  ),
+  Bank(
+    question: 'Fake website link?',
+    options: [
+      'Phishing',
+      'Malware',
+      'Ransomware',
+      'Virus'
+    ],
+    answer: 0,
+    category: 'Phishing',
+  ),
+  Bank(
+    question: 'Suspicious message request?',
+    options: [
+      'Malware',
+      'Phishing',
+      'Trojan',
+      'Safe'
+    ],
+    answer: 1,
+    category: 'Phishing',
+  ),
+  Bank(
+    question: 'Someone wants login?',
+    options: [
+      'Ransomware',
+      'Phishing',
+      'Malware',
+      'Spam'
+    ],
+    answer: 1,
+    category: 'Phishing',
   ),
   Bank(
     question: 'Which of the following is NOT a common phishing vector?',
@@ -34,6 +81,7 @@ final List<Bank> questionBank = [
       'Compiler Logs'
     ],
     answer: 3,
+    category: 'Phishing',
   ),
   Bank(
     question: 'Spear-phishing is:',
@@ -44,6 +92,7 @@ final List<Bank> questionBank = [
       'A type of DDoS attack'
     ],
     answer: 1,
+    category: 'Phishing',
   ),
   Bank(
     question: 'What psychological trick is often used in phishing emails?',
@@ -54,6 +103,7 @@ final List<Bank> questionBank = [
       'Confusion'
     ],
     answer: 1,
+    category: 'Phishing',
   ),
   Bank(
     question: 'What does the Anti-Phishing Working Group (APWG) report as the most used protocol in phishing attacks?',
@@ -64,6 +114,7 @@ final List<Bank> questionBank = [
       'VPN'
     ],
     answer: 2,
+    category: 'Phishing',
   ),
   Bank(
     question: 'Which machine learning model is commonly used in phishing detection?',
@@ -74,6 +125,7 @@ final List<Bank> questionBank = [
       'Naive Bayes'
     ],
     answer: 1,
+    category: 'Phishing',
   ),
   Bank(
     question: 'What is "vishing"?',
@@ -84,6 +136,7 @@ final List<Bank> questionBank = [
       'VPN-based spoofing'
     ],
     answer: 2,
+    category: 'Phishing',
   ),
   Bank(
     question: 'What term describes a fake website designed to look like a real one?',
@@ -94,6 +147,7 @@ final List<Bank> questionBank = [
       'Proxy Mask'
     ],
     answer: 2,
+    category: 'Phishing',
   ),
   Bank(
     question: 'What does “Smishing” refer to?',
@@ -104,6 +158,7 @@ final List<Bank> questionBank = [
       'SMS virus hacking'
     ],
     answer: 1,
+    category: 'Phishing',
   ),
   Bank(
     question: 'Which of the following is a visual cue that a site might be phishing?',
@@ -114,6 +169,7 @@ final List<Bank> questionBank = [
       'Long website name'
     ],
     answer: 1,
+    category: 'Phishing',
   ),
 
   //Ransomware
@@ -126,8 +182,52 @@ final List<Bank> questionBank = [
       'Speed up the system'
     ],
     answer: 1,
+    category: 'Ransomware',
   ),
-
+  Bank(
+    question: 'Files locked suddenly?',
+    options: [
+      'Ransomware',
+      'Virus',
+      'Phishing',
+      'Spyware'
+    ],
+    answer: 0,
+    category: 'Ransomware',
+  ),
+  Bank(
+    question: 'Pay to unlock files?',
+    options: [
+      'Malware',
+      'Ransomware',
+      'Adware',
+      'Trojan'
+    ],
+    answer: 1,
+    category: 'Ransomware',
+  ),
+  Bank(
+    question: 'Computer shows ransom?',
+    options: [
+      'Ransomware',
+      'Virus',
+      'Phishing',
+      'Safe'
+    ],
+    answer: 0,
+    category: 'Ransomware',
+  ),
+  Bank(
+    question: 'Sudden file encryption?',
+    options: [
+      'Malware',
+      'Phishing',
+      'Ransomware',
+      'Spyware'
+    ],
+    answer: 2,
+    category: 'Ransomware',
+  ),
   Bank(
     question: 'Which attack vector is most common for ransomware?',
     options: [
@@ -137,6 +237,7 @@ final List<Bank> questionBank = [
       'Sound waves'
     ],
     answer: 2,
+    category: 'Ransomware',
   ),
 
   Bank(
@@ -148,6 +249,7 @@ final List<Bank> questionBank = [
       'It lowers encryption strength'
     ],
     answer: 1,
+    category: 'Ransomware',
   ),
 
   Bank(
@@ -159,6 +261,7 @@ final List<Bank> questionBank = [
       'A type of VPN'
     ],
     answer: 2,
+    category: 'Ransomware',
   ),
 
   Bank(
@@ -170,6 +273,7 @@ final List<Bank> questionBank = [
       'Update only yearly'
     ],
     answer: 1,
+    category: 'Ransomware',
   ),
 
   Bank(
@@ -181,6 +285,7 @@ final List<Bank> questionBank = [
       'Antivirus'
     ],
     answer: 2,
+    category: 'Ransomware',
   ),
 
   Bank(
@@ -192,6 +297,7 @@ final List<Bank> questionBank = [
       '.dll'
     ],
     answer: 1,
+    category: 'Ransomware',
   ),
 
   Bank(
@@ -203,6 +309,7 @@ final List<Bank> questionBank = [
       'Locky'
     ],
     answer: 0,
+    category: 'Ransomware',
   ),
 
   Bank(
@@ -214,6 +321,7 @@ final List<Bank> questionBank = [
       'Send the malware to friends'
     ],
     answer: 1,
+    category: 'Ransomware',
   ),
 
   Bank(
@@ -225,6 +333,7 @@ final List<Bank> questionBank = [
       'WHO'
     ],
     answer: 2,
+    category: 'Ransomware',
   ),
 
   //Malware
@@ -237,6 +346,7 @@ final List<Bank> questionBank = [
       'Malware antivirus'
     ],
     answer: 0,
+    category: 'Malware',
   ),
 
   Bank(
@@ -248,6 +358,7 @@ final List<Bank> questionBank = [
       'Spyware'
     ],
     answer: 1,
+    category: 'Malware',
   ),
 
   Bank(
@@ -259,6 +370,7 @@ final List<Bank> questionBank = [
       'Disabling firewall'
     ],
     answer: 2,
+    category: 'Malware',
   ),
 
   Bank(
@@ -270,6 +382,7 @@ final List<Bank> questionBank = [
       'Keep your software updated'
     ],
     answer: 3,
+    category: 'Malware',
   ),
 
   Bank(
@@ -281,6 +394,7 @@ final List<Bank> questionBank = [
       'Adware'
     ],
     answer: 1,
+    category: 'Malware',
   ),
   Bank(
     question: 'Which malware is designed to provide ongoing privileged access to a system?',
@@ -291,6 +405,7 @@ final List<Bank> questionBank = [
       'Worm'
     ],
     answer: 2,
+    category: 'Malware',
   ),
 
   Bank(
@@ -302,6 +417,7 @@ final List<Bank> questionBank = [
       'Keylogger'
     ],
     answer: 0,
+    category: 'Malware',
   ),
 
   Bank(
@@ -313,6 +429,7 @@ final List<Bank> questionBank = [
       'Scareware'
     ],
     answer: 1,
+    category: 'Malware',
   ),
 
   Bank(
@@ -324,8 +441,52 @@ final List<Bank> questionBank = [
       'Worm'
     ],
     answer: 0,
+    category: 'Malware',
   ),
-
+  Bank(
+    question: 'Program runs secretly?',
+    options: [
+      'Malware',
+      'Ransomware',
+      'Phishing',
+      'Safe'
+    ],
+    answer: 0,
+    category: 'Malware',
+  ),
+  Bank(
+    question: 'Computer slows suddenly?',
+    options: [
+      'Malware',
+      'Ransomware',
+      'Phishing',
+      'Internet'
+    ],
+    answer: 0,
+    category: 'Malware',
+  ),
+  Bank(
+    question: 'Unwanted popups appear?',
+    options: [
+      'Malware',
+      'Adware',
+      'Phishing',
+      'Ransomware'
+    ],
+    answer: 1,
+    category: 'Malware',
+  ),
+  Bank(
+    question: 'Unknown software installed?',
+    options: [
+      'Malware',
+      'Worm',
+      'Trojan',
+      'Phishing'
+    ],
+    answer: 0,
+    category: 'Malware',
+  ),
   Bank(
     question: 'Which of these is NOT a type of malware?',
     options: [
@@ -335,5 +496,6 @@ final List<Bank> questionBank = [
       'Ransomware'
     ],
     answer: 2,
+    category: 'Malware',
   ),
 ];
