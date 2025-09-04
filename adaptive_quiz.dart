@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'question_bank.dart';
 import 'clueBank.dart';
-import 'main.dart';
+import 'difficulty_tag.dart';
 import 'dart:math';
 import 'additional_info.dart';
 

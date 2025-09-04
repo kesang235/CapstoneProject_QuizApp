@@ -1,109 +1,158 @@
-import 'dart:convert';
-import 'package:flutter/services.dart' show rootBundle;
-import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
+import 'adaptive_quiz.dart';
+import 'chapters.dart';
 
-class DifficultyResult {
-  final String question;
-  final String category;
+void main() => runApp(const MyApp());
 
-  DifficultyResult({required this.question, required this.category});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
+    );
+  }
 }
 
-class DifficultyAnalyzer {
-  final String apiKey = 'Bearer key';
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
-  Future<DifficultyResult> analyze(String sentence) async {
-    int matchedWords = 0;
-    int wordCount = 0;
-    int easyScore = 0;
-    int mediumScore = 0;
-    int hardScore = 0;
-    String difficulty = "";
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
 
-    // Glossary matching
-    final csvData = await rootBundle.loadString('assets/glossary.csv');
-    final lines = LineSplitter.split(csvData);
-    final terms = lines.map((line) => line.trim().toLowerCase()).toSet();
+class _HomePageState extends State<HomePage> {
+  final List<String> topics = ['Phishing', 'Malware', 'Ransomware'];
+  late List<bool> topicsRead;
 
-    final formatSentence = sentence
-        .toLowerCase()
-        .replaceAll(RegExp(r'[^\w\s]'), '')
-        .split(' ')
-        .where((word) => word.isNotEmpty)
-        .toList();
+  @override
+  void initState() {
+    super.initState();
+    topicsRead = List<bool>.filled(topics.length, false);
+  }
 
-    final sentenceWords = formatSentence.toSet();
-    final matches = terms.intersection(sentenceWords);
+  bool get allTopicsRead => topicsRead.every((e) => e);
 
-    matchedWords = matches.length;
-    wordCount = formatSentence.length;
-
-    if (matchedWords == 0) {
-      easyScore += 1;
-    } else if (matchedWords == 1) {
-      mediumScore += 1;
-    } else {
-      hardScore += 1;
-    }
-
-    // MNLI API call
-    final url = Uri.parse('https://api-inference.huggingface.co/models/facebook/bart-large-mnli');
-    final headers = {
-      'Authorization': apiKey,
-      'Content-Type': 'application/json'
-    };
-    final body = jsonEncode({
-      'inputs': sentence,
-      'parameters': {
-        'candidate_labels': ['easy', 'medium', 'hard']
+  void markAllAsRead() {
+    setState(() {
+      for (int i = 0; i < topicsRead.length; i++) {
+        topicsRead[i] = true;
       }
     });
+  }
 
-    final response = await http.post(url, headers: headers, body: body);
-
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      final labels = List<String>.from(data['labels']);
-      difficulty = labels.first;
-
-      if (difficulty == 'easy') {
-        easyScore += 1;
-      } else if (difficulty == 'medium') {
-        mediumScore += 1;
-      } else if (difficulty == 'hard') {
-        hardScore += 1;
-      }
+  void openTopicPage(int index) async {
+    Widget page;
+    switch (topics[index]) {
+      case 'Phishing':
+        page = const PhishingPage();
+        break;
+      case 'Malware':
+        page = const MalwarePage();
+        break;
+      case 'Ransomware':
+        page = const RansomwarePage();
+        break;
+      default:
+        return;
     }
 
-    // Word count scoring
-    if (wordCount < 5) {
-      easyScore += 1;
-    } else if (wordCount <= 8) {
-      mediumScore += 1;
-    } else {
-      hardScore += 1;
-    }
+    final result = await Navigator.push<bool>(
+      context,
+      MaterialPageRoute(builder: (_) => page),
+    );
 
-    // Final overall difficulty decision
-    String overall = "Easy";
-    if (easyScore > mediumScore && easyScore > hardScore) {
-      overall = "Easy";
-    } else if (mediumScore > easyScore && mediumScore > hardScore) {
-      overall = "Medium";
-    } else if (hardScore > easyScore && hardScore > mediumScore) {
-      overall = "Hard";
-    } else if (easyScore == mediumScore && mediumScore == hardScore && easyScore != 0) {
-      overall = "Medium";
-    } else if (easyScore == 0 && mediumScore == 0 && hardScore == 0) {
-      overall = "Easy";
-    } else if (easyScore == mediumScore && hardScore == 0) {
-      overall = "Easy";
-    } else if (hardScore == mediumScore && easyScore == 0) {
-      overall = "Medium";
-    } else if (hardScore == easyScore && mediumScore == 0) {
-      overall = "Medium";
+    if (result == true) {
+      setState(() {
+        topicsRead[index] = true;
+      });
     }
+  }
 
-    return DifficultyResult(question: sentence, category: overall);
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Cyber Quiz App',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.blueGrey.shade800,
+      ),
+      backgroundColor: Colors.blueGrey.shade50,
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Topics:',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 12),
+
+            for (int i = 0; i < topics.length; i++)
+              Card(
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                margin: const EdgeInsets.symmetric(vertical: 6),
+                child: ListTile(
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                  leading: Checkbox(
+                    value: topicsRead[i],
+                    onChanged: null,
+                  ),
+                  title: Text(
+                    topics[i],
+                    style: const TextStyle(fontSize: 18),
+                  ),
+                  onTap: () => openTopicPage(i),
+                ),
+              ),
+
+            const Spacer(),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue.shade600,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 12),
+                  ),
+                  onPressed: markAllAsRead,
+                  child: const Text('Mark all as read'),
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green.shade600,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 12),
+                    textStyle:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                  onPressed: allTopicsRead
+                      ? () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AdaptiveQuiz()),
+                    );
+                  }
+                      : null,
+                  child: const Text('Start Quiz'),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

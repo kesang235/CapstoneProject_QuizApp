@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'chapters.dart';
-import 'homepage.dart';
 
 class AdditionalInfoPage extends StatelessWidget with ContentHelpers {
   final String category;
