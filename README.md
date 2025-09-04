@@ -99,6 +99,7 @@ A dataset of cybersecurity technical terms is used
 
 ## 📄 Credits
 
+- My Group (Sushil, Subash, Manish, Krishna)
 - Flutter team (framework & SDK)
 - Facebook AI (BART API)
 - Dataset from Computer Science Ontology (CSO)
