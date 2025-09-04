@@ -19,7 +19,7 @@ An educational Flutter app that teaches **Phishing, Malware, and Ransomware** wi
 
 ## 📌 About  
 
-**Adaptive Cybersecurity Quiz App** is designed to raise awareness of **cyber threats** (phishing, malware, and ransomware) through an interactive learning experience.  
+**Adaptive Cybersecurity Quiz App** is designed to raise awareness of **cyber threats** (phishing, malware, and ransomware)  
 
 Users first complete learning modules, then attempt a quiz that **adapts to their knowledge level** using multiple difficulty factors.  
 
@@ -40,24 +40,17 @@ Users first complete learning modules, then attempt a quiz that **adapts to thei
 The quiz uses **multiple factors** to determine question difficulty:  
 
 1. **Facebook BART (MNLI API)**  
-   - Widely used for text classification tasks in NLP  
-   - Cost-efficient and pretrained for understanding complex language  
    - Each question is sent to the API with 3 labels: *Easy, Medium, Hard*  
    - API returns probability scores → highest probability label is chosen  
-   - To optimize performance, only 3 questions are filtered at a time (not all 30)  
+ 
 
 2. **Glossary-Based Term Matching**  
-   - A dataset of cybersecurity technical terms is used  
-   - More domain-specific words = more cognitive load (supported by CompLex 2.0 research)  
-   - Rules:  
+   - A dataset of cybersecurity technical terms is used   
      - No term match → **Easy**  
      - 1 term match → **Medium**  
      - 2+ term matches → **Hard**  
 
 3. **Question Length**  
-   - Inspired by readability formulas (Flesch-Kincaid, Gunning Fog)  
-   - Longer sentences increase cognitive load  
-   - Rules:  
      - < 5 words → **Easy**  
      - 5–8 words → **Medium**  
      - > 8 words → **Hard**  
@@ -69,14 +62,11 @@ The quiz uses **multiple factors** to determine question difficulty:
 ## 💡 Hint-Bot  
 
 - Provides instant hints when the user presses the *hint button*  
-- Uses a **predefined hint-bank**, eliminating reliance on external APIs  
-- If no match is found → responds with *“Sorry, couldn’t understand.”*  
 
 <br>  
 
 ## 📊 Progress Tracking  
 
-- Records completion of modules and quiz attempts with no performance impact  
 - Displays:  
   - Current difficulty level  
   - Score  
@@ -108,4 +98,5 @@ Deployment: Android APK (Gradle build)
 
 Flutter team (framework & SDK)
 Facebook AI (BART API)
+Dataset from Computer Science Ontology (CSO)
 Special thanks to [Gateway Business College] for project coordination
