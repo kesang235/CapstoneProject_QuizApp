@@ -53,7 +53,7 @@ The quiz uses **multiple factors** to determine question difficulty:
 3. **Question Length**  
      - < 5 words → **Easy**  
      - 5–8 words → **Medium**  
-     - > 8 words → **Hard**  
+     - 8 words → **Hard**  
 
 ✅ Final difficulty is chosen by a **voting system**: each factor gives its vote, and the label with the most votes is selected.  
 
@@ -85,20 +85,22 @@ The quiz uses **multiple factors** to determine question difficulty:
 
 ## 🛠️ Tech Stack
 
-Frontend: Flutter (Dart)
-Backend/NLP: Facebook BART API
-Dataset: Custom glossary of cybersecurity terms
-Deployment: Android APK (Gradle build)
-
+- Frontend: Flutter (Dart)
+- Backend/NLP: Facebook BART API
+- Dataset: Custom glossary of cybersecurity terms
+- Deployment: Android APK
+  
 <br>
+
 ## 📄 License
 
 © Kesang Lama
 
 <br>
+
 ## 📄 Credits
 
-Flutter team (framework & SDK)
-Facebook AI (BART API)
-Dataset from Computer Science Ontology (CSO)
-Special thanks to [Gateway Business College] for project coordination
+- Flutter team (framework & SDK)
+- Facebook AI (BART API)
+- Dataset from Computer Science Ontology (CSO)
+- Special thanks to [Gateway Business College] for project coordination
