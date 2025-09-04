@@ -5,15 +5,16 @@ An educational Flutter app that teaches **Phishing, Malware, and Ransomware** wi
 <br>  
 
 ## 📖 Table of Contents  
-- [About](#-about)  
-- [Features](#-features)  
-- [Difficulty Labelling](#-difficulty-labelling)  
-- [Hint-Bot](#-hint-bot)  
-- [Progress Tracking](#-progress-tracking)  
-- [Installation](#-installation)  
-- [Tech Stack](#-tech-stack)  
-- [License](#-license)  
-- [Credits](#-credits)  
+- [About](#about)  
+- [Features](#features)  
+- [Difficulty Labelling](#difficulty-labelling)  
+- [Hint-Bot](#hint-bot)  
+- [Progress Tracking](#progress-tracking)  
+- [Installation](#installation)  
+- [Tech Stack](#tech-stack)  
+- [License](#license)  
+- [Credits](#credits)  
+
 
 <br>  
 
@@ -25,7 +26,7 @@ Users first complete learning modules, then attempt a quiz that **adapts to thei
 
 <br>  
 
-## 🕹️ Features  
+## 🕹️ Features
 
 - 📚 **Learning Modules**: Covers phishing, malware, ransomware  
 - 🎯 **Adaptive Quiz Engine**: Dynamically adjusts question difficulty (Easy → Medium → Hard)  
@@ -42,18 +43,17 @@ The quiz uses **multiple factors** to determine question difficulty:
 1. **Facebook BART (MNLI API)**  
    - Each question is sent to the API with 3 labels: *Easy, Medium, Hard*  
    - API returns probability scores → highest probability label is chosen  
- 
 
 2. **Glossary-Based Term Matching**  
-   - A dataset of cybersecurity technical terms is used   
-     - No term match → **Easy**  
-     - 1 term match → **Medium**  
-     - 2+ term matches → **Hard**  
+A dataset of cybersecurity technical terms is used   
+   - No term match → **Easy**  
+   - 1 term match → **Medium**  
+   - 2+ term matches → **Hard**  
 
 3. **Question Length**  
-     - < 5 words → **Easy**  
-     - 5–8 words → **Medium**  
-     - 8 words → **Hard**  
+   - <5 words → **Easy**  
+   - 5–8 words → **Medium**  
+   - 8 words → **Hard**  
 
 ✅ Final difficulty is chosen by a **voting system**: each factor gives its vote, and the label with the most votes is selected.  
 
@@ -84,7 +84,6 @@ The quiz uses **multiple factors** to determine question difficulty:
 <br> 
 
 ## 🛠️ Tech Stack
-
 - Frontend: Flutter (Dart)
 - Backend/NLP: Facebook BART API
 - Dataset: Custom glossary of cybersecurity terms
