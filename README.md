@@ -5,15 +5,15 @@ An educational Flutter app that teaches **Phishing, Malware, and Ransomware** wi
 <br>  
 
 ## 📖 Table of Contents  
-- [About](#about)  
-- [Features](#features)  
-- [Difficulty Labelling](#difficulty-labelling)  
-- [Hint-Bot](#hint-bot)  
-- [Progress Tracking](#progress-tracking)  
-- [Installation](#installation)  
-- [Tech Stack](#tech-stack)  
-- [License](#license)  
-- [Credits](#credits)  
+- [About](#-about)  
+- [Features](#-features)  
+- [Difficulty Labelling](#-difficulty-labelling)  
+- [Hint-Bot](#-hint-bot)  
+- [Progress Tracking](#-progress-tracking)  
+- [Installation](#-installation)  
+- [Tech](#-tech)  
+- [License](#-license)  
+- [Credits](#-credits)  
 
 
 <br>  
@@ -26,7 +26,7 @@ Users first complete learning modules, then attempt a quiz that **adapts to thei
 
 <br>  
 
-## 🕹️ Features
+## 🕹 Features
 
 - 📚 **Learning Modules**: Covers phishing, malware, ransomware  
 - 🎯 **Adaptive Quiz Engine**: Dynamically adjusts question difficulty (Easy → Medium → Hard)  
@@ -83,7 +83,7 @@ A dataset of cybersecurity technical terms is used
 
 <br> 
 
-## 🛠️ Tech Stack
+## 🛠 Tech
 - Frontend: Flutter (Dart)
 - Backend/NLP: Facebook BART API
 - Dataset: Custom glossary of cybersecurity terms
