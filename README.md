@@ -81,7 +81,9 @@ The quiz uses **multiple factors** to determine question difficulty:
 - Copy `app-release.apk` to your Android device  
 - Install and run the app
 
-##🛠️ Tech Stack
+<br> 
+
+## 🛠️ Tech Stack
 
 Frontend: Flutter (Dart)
 Backend/NLP: Facebook BART API
@@ -89,12 +91,12 @@ Dataset: Custom glossary of cybersecurity terms
 Deployment: Android APK (Gradle build)
 
 <br>
-##📄 License
+## 📄 License
 
 © Kesang Lama
 
 <br>
-##📄 Credits
+## 📄 Credits
 
 Flutter team (framework & SDK)
 Facebook AI (BART API)
