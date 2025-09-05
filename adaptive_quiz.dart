@@ -21,6 +21,8 @@ class _AdaptiveQuizState extends State<AdaptiveQuiz> {
   bool quizCompleted = false;
   bool isLoading = false;
 
+  bool? lastAnswerCorrect;
+
   List<Bank> unaskedQuestions = [];
   Bank? currentQuestion;
 
@@ -49,6 +51,7 @@ class _AdaptiveQuizState extends State<AdaptiveQuiz> {
 
     setState(() {
       isLoading = true;
+      lastAnswerCorrect = null;
     });
 
     Bank? selected;
@@ -92,6 +95,11 @@ class _AdaptiveQuizState extends State<AdaptiveQuiz> {
       wrongPerCategory[cat] = (wrongPerCategory[cat] ?? 0) + 1;
     }
 
+
+    setState(() {
+      lastAnswerCorrect = wasCorrect;
+    });
+
     if (wasCorrect) {
       if (currentLevel < 2) currentLevel++;
       score++;
@@ -108,7 +116,7 @@ class _AdaptiveQuizState extends State<AdaptiveQuiz> {
       return;
     }
 
-    _loadNextQuestion();
+    Future.delayed(const Duration(milliseconds: 400), _loadNextQuestion);
   }
 
   String _difficultyFromLevel(int level) {
@@ -338,6 +346,15 @@ class _AdaptiveQuizState extends State<AdaptiveQuiz> {
               ],
             ),
           ),
+
+          // NEW: Colored overlay for correct/wrong answer
+          if (lastAnswerCorrect != null)
+            Container(
+              color: lastAnswerCorrect!
+                  ? Colors.green.withOpacity(0.2)
+                  : Colors.red.withOpacity(0.2),
+            ),
+
           if (isLoading)
             Container(
               color: Colors.black54,
@@ -347,6 +364,7 @@ class _AdaptiveQuizState extends State<AdaptiveQuiz> {
                 ),
               ),
             ),
+
           Positioned(
             bottom: 20,
             right: 20,
