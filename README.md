@@ -81,6 +81,7 @@ A dataset of cybersecurity technical terms is used
 - Navigate to:  
 - Copy `app-release.apk` to your Android device  
 - Install and run the app
+- Have access to Internet
 
 <br> 
 
