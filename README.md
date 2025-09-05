@@ -1,4 +1,4 @@
-# 🛡️ Adaptive Cybersecurity Quiz App  
+# 🛡️ Adaptive Cybersecurity Quiz App  (Android only)
 
 An educational Flutter app that teaches **Phishing, Malware, and Ransomware** with an **adaptive AI-powered quiz system**.  
 
@@ -69,7 +69,8 @@ A dataset of cybersecurity technical terms is used
 
 - Displays:  
   - Current difficulty level  
-  - Score  
+  - Score
+  - Light Prompt to let user know if the answer is right or wrong
   - Current question number (progress in quiz)  
 
 <br>  
