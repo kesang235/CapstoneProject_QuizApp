@@ -77,11 +77,14 @@ A dataset of cybersecurity technical terms is used
 
 ## 🚀 Installation  
 
-### Option 1: Install APK on Android  
-- Navigate to:  
-- Copy `app-release.apk` to your Android device  
-- Install and run the app
-- Have access to Internet
+### Install APK on Android  
+
+- Open the project in Android Studio.
+- Place glossary.csv in the assets folder and the Dart files in lib.
+- In difficulty_tag.dart, enter your own Hugging Face API key. (This is for your safety — my API key is not public and using it is restricted.)
+- Build the APK.
+- Transfer and run the APK on your device.
+Note: The APK in this repo uses an invalid API key but still works using the glossary and question length factor.
 
 <br> 
 
